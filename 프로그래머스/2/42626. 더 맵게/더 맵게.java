@@ -25,13 +25,18 @@ class Solution {
             minHeap.add(num);
         
         int cnt = 0;
-        while (!minHeap.isEmpty() && minHeap.peek() < K) {
-            if (minHeap.size() == 1)
-                if (minHeap.peek() < K)
-                    return -1;
+        while (minHeap.size() > 1 && minHeap.peek() < K) {
             minHeap.add(minHeap.poll() + (minHeap.poll() * 2));
             cnt++;
         }
+        if (minHeap.size() == 1 && minHeap.peek() < K)
+                return -1;
+        // while (!minHeap.isEmpty() && minHeap.peek() < K) {
+        //     if (minHeap.size() == 1 && minHeap.peek() < K)
+        //         return -1;
+        //     minHeap.add(minHeap.poll() + (minHeap.poll() * 2));
+        //     cnt++;
+        // }
         
         
         
