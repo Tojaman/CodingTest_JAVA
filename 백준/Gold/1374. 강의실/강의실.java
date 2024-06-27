@@ -49,14 +49,14 @@ public class Main {
             int lecnum = Integer.parseInt(tokenizer.nextToken());
             int lecstart = Integer.parseInt(tokenizer.nextToken());
             int lecend = Integer.parseInt(tokenizer.nextToken());
-            lectures[i] = new Lecture(lecnum, lecstart, lecend);
-            // pq.add(new Lecture(lecnum, lecstart, lecend));
+            // lectures[i] = new Lecture(lecnum, lecstart, lecend);
+            pq.add(new Lecture(lecnum, lecstart, lecend));
         }
 
-        Arrays.sort(lectures);
-        for (int i = 0; i < N; i++) {
-            pq.add(lectures[i]);
-        }
+        // Arrays.sort(lectures);
+        // for (int i = 0; i < N; i++) {
+        //     pq.add(lectures[i]);
+        // }
 
         int result = 0;
         // while (!pq.isEmpty()) {
