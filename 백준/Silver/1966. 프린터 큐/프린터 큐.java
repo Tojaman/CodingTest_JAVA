@@ -6,16 +6,16 @@ import java.util.*;
 public class Main {
     public static void main(String [] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        Queue<int[]> q = new LinkedList<int[]>();
-//        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        int N = 0;
-        int M = 0;
+        
 
         int testNum = Integer.parseInt(br.readLine());
         for (int i = 0; i < testNum; i++) {
             Queue<int[]> q = new LinkedList<int[]>();
             PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+            int N = 0;
+            int M = 0;
             int cnt = 0;
+            
             StringTokenizer st1 = new StringTokenizer(br.readLine());
             N = Integer.parseInt(st1.nextToken());
             M = Integer.parseInt(st1.nextToken());
@@ -41,16 +41,5 @@ public class Main {
                     q.add(q.poll());
             }
         }
-
-//        while (!q.isEmpty()) {
-//            if (q.peek()[1] == pq.peek()) {
-//                if (q.poll()[0] == M) {
-//                    System.out.println(cnt++);
-//                    break;
-//                }
-//                else
-//                    q.add(q.poll());
-//            }
-//        }
     }
 }
