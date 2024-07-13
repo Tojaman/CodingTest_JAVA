@@ -1,67 +1,53 @@
-import java.util.HashSet;
-import java.lang.Math;
-import java.util.Iterator;
+import java.util.*;
+/** 문제 설명
+numbers에 주어진 값을 이용하여 만들 수 있는 소수는 몇개인가?
+ex. "17": 1, 7, 17 총 3개
+*/
 
+/** 풀이 방법
+1. 재귀로 숫자를 조합한 후 HashSet에 삽입한다.
+2. 숫자를 조합하여 소수를 카운트한다.
+*/
 class Solution {
-    
-    HashSet<Integer> set = new HashSet<>();
-    
+    HashSet<Integer> hs = new HashSet<>();
     public int solution(String numbers) {
         
-        // 숫자 조합 구하기(DFS 재귀 이용)
-        dfs("", numbers);
-            
-        // 소수인지 확인
+        // 1. 재귀로 숫자를 조합한 후 HashSet에 삽입한다.
+        combination("", numbers);
+        
+        // 2. hs에서 소수의 개수를 구한다.(에라테스테네의 체)
         int cnt = 0;
-        Iterator<Integer> iterator = set.iterator();
-        while (iterator.hasNext()) {
-            if (prime(iterator.next())) {
+        for (int num : hs) {
+            if (prime(num)) {
                 cnt++;
             }
         }
         return cnt;
     }
     
-    /**
-    1. dfs()를 호출하면 for문 동작
-    2. for에서 숫자를 조합하여 dfs()의 첫번째 인수로 보내고 조합에 사용되지 않는 숫자를 두 번째 인수로 준다.
-    3. 2번이 반복적으로 실행되면서 모든 숫자 조합 완성
-    */
-    public void dfs(String start, String arr) {
-        // 조합이 완료된 start를 재귀로 받아서 set에 삽입(첫 빈 start는 예외)
-        if (!start.equals("")) {
-            set.add(Integer.valueOf(start));
-        }
+    public void combination(String target, String arr) {
+        if (!target.equals("")) 
+            hs.add(Integer.valueOf(target)); // Integer.valueOf()를 통해 맨 앞에 0이 온다면 무시(011, 11 -> 모두 11로 변환)
         
-        // start와 남은 숫자를 조합
-        // dfs(조합된 숫자, 조합에 사용한 숫자를 제외하고 남은 숫자들) 재귀
-        for (int i = 0; i < arr.length(); i++) {
-            dfs(start + arr.charAt(i), arr.substring(0, i) + arr.substring(i + 1));
-        }
+        /** 아래 코드는 중복된 숫자가 있을 경우 오류 발생
+        ex. arr가 "110"이고 arrValue가 '1'일 때 앞에 1과 뒤 1중 뭘 ""로 대체할지 알 수 없음*/
+        // for (char arrValue : arr.toCharArray()) {
+        //     combination(target + arrValue, arr.replace(String.valueOf(arrValue), ""));
+        // }
+        
+        for (int i = 0; i < arr.length(); i++) 
+            combination(target + arr.charAt(i), arr.substring(0, i) + arr.substring(i + 1));
     }
-    
-    public boolean prime(int num) {
-        if (num <= 1) {  // 0이나 1일 경우 false 반환
+                        
+    public boolean prime(int target) {
+        if (target == 0 || target == 1) {
             return false;
         }
-        if (num == 2) {  // 2는 소수
-            return true;
-        }
-        if (num % 2 == 0) {  // 짝수는 소수가 아님
-            return false;
-        }
-        int sq = (int) Math.sqrt(num);
-        for (int i = 2; i <= sq; i++) {
-            if (num % i == 0) {
-                return false;  // 나누어 떨어지면 소수가 아님
+        for(int i = 2 ; i <= Math.sqrt(target); i++){
+            if(target % i == 0 ) { // 소수가 아님
+                return false;
             }
         }
-        return true;  // 나누어 떨어지지 않으면 소수
-    }
-
-    public static void main(String[] args) {
-        Solution sol = new Solution();
-        System.out.println(sol.solution("17")); // 테스트 예제: "17" -> 소수: 7, 17 -> 출력: 2
-        System.out.println(sol.solution("011")); // 테스트 예제: "011" -> 소수: 11 -> 출력: 2
+        return true;
     }
 }
