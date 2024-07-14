@@ -2,7 +2,7 @@ class Solution {
     public static int maxcnt = 0;
     public int solution(int k, int[][] dungeons) {
         boolean[] visited = new boolean[dungeons.length];
-        maxcnt = 0;
+        // maxcnt = 0;
         dfs(dungeons, visited, k, 0);
         return maxcnt;
     }
