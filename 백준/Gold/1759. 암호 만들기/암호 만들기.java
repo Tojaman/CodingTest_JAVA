@@ -34,7 +34,7 @@ public class Main {
 
         Arrays.sort(words);
         for (int i = 0; i < words.length; i++) {
-            dfs("", words, i, L);
+            backtracking("", words, i, L);
         }
 
 
@@ -45,19 +45,16 @@ public class Main {
 
     }
 
-    public static void dfs(String nowWord, char[] word, int idx, int L) {
+    public static void backtracking(String nowWord, char[] word, int idx, int L) {
         String newWord = nowWord + word[idx];
-
-//        if (newWord.length() > L) {
-//            return;
-//        }
+        
         if (newWord.length() == L && vowelCheck(newWord)) {
             result.add(newWord);
             return;
         }
 
         for (int i = idx+1; i < word.length; i++) {
-            dfs(newWord, word, i, L);
+            backtracking(newWord, word, i, L);
         }
 
     }
