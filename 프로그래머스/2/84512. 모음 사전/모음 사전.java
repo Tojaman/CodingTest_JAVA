@@ -17,28 +17,36 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-class Solution {
-    ArrayList<String> combination = new ArrayList<>();
-    String[] vowels = {"A", "E", "I", "O", "U"};
-    public int solution(String word) {
-        for (String vo : vowels) {
-            dfs(vo, "");
-        }
-        // Arrays.sort(combination);
-        Collections.sort(combination);
-        return combination.indexOf(word) + 1;
+// class Solution {
+//     ArrayList<String> combination = new ArrayList<>();
+//     String[] vowels = {"A", "E", "I", "O", "U"};
+//     public int solution(String word) {
+//         for (String vo : vowels) {
+//             dfs(vo, "");
+//         }
+//         // Arrays.sort(combination);
+//         Collections.sort(combination);
+//         return combination.indexOf(word) + 1;
         
-    }
+//     }
     
-    public void dfs(String vowel, String addVowel) {
-        String newVowel = vowel + addVowel;
-        if (newVowel.length() > 5)
-            return;
-        if (!combination.contains(newVowel))
-            combination.add(newVowel);
-        for (String vo : vowels) {
-            dfs(newVowel, vo);
-        }
-    }
+//     public void dfs(String vowel, String addVowel) {
+//         String newVowel = vowel + addVowel;
+//         if (newVowel.length() > 5)
+//             return;
+//         if (!combination.contains(newVowel))
+//             combination.add(newVowel);
+//         for (String vo : vowels) {
+//             dfs(newVowel, vo);
+//         }
+//     }
     
+// }
+
+class Solution {
+    public int solution(String word) {
+        int answer = 0, per = 3905;
+        for(String s : word.split("")) answer += "AEIOU".indexOf(s) * (per /= 5) + 1;
+        return answer;
+    }
 }
