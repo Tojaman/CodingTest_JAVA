@@ -30,21 +30,33 @@ class Solution {
                 max[2] += 1;
         }
         
-        // int maxValue = max[0];
+//         int[] m1 = {1, 2, 3, 4, 5};
+//         int[] m2 = {2, 1, 2, 3, 2, 4, 2, 5};
+//         int[] m3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+        
+//         int[] max = new int[3];
+//         for (int i = 0; i < answers.length; i++) {
+//             if (answers[i] == m1[i % 5]) max[0]++;
+//             if (answers[i] == m2[i % 8]) max[1]++;
+//             if (answers[i] == m3[i % 10]) max[2]++;
+//         }
+        
         int maxValue = Math.max(max[0], Math.max(max[1], max[2]));
         ArrayList<Integer> answer = new ArrayList<>();
         for (int i = 0; i < max.length; i++) {
-            // if (max[i] > maxValue) {
-            //     maxValue = max[i];
-            //     answer.clear();
-            //     answer.add(i+1);
-            // }
             if (max[i] == maxValue) {
                 answer.add(i+1);
             }
         }
         
+        int[] result = new int[answer.size()];
+        int cnt = 0;
+        for(int num : answer)
+            result[cnt++] = num;
         
-        return answer.stream().mapToInt(Integer::intValue).toArray();
+        return result;
+        
+        
+        // return answer.stream().mapToInt(Integer::intValue).toArray();
     }
 }
