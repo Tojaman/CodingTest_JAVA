@@ -25,14 +25,16 @@ public class Main {
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(new int[] {start, 0});
 
-        HashSet<Integer> visited = new HashSet<>();
+//        HashSet<Integer> visited = new HashSet<>();
+        boolean[] visited = new boolean[100001];
         int min = Integer.MAX_VALUE;
 
         while (!queue.isEmpty()) {
             int[] current = queue.poll();
             int cLocation = current[0];
             int cTime = current[1];
-            visited.add(cLocation);
+//            visited.add(cLocation);
+            visited[cLocation] = true;
 
             int minus = cLocation -1;
             int plus = cLocation +1;
@@ -40,13 +42,16 @@ public class Main {
 
             if (cLocation == target) min = Math.min(min, cTime);
 
-            if (minus >= 0 && !visited.contains(minus)) {
+            if (minus >= 0 && !visited[minus]) {
+//            if (minus >= 0 && !visited.contains(minus)) {
                 queue.offer(new int[] {minus, cTime+1});
             }
-            if (plus <= 100000 && !visited.contains(plus)) {
+            if (plus <= 100000 && !visited[plus]) {
+//            if (plus <= 100000 && !visited.contains(plus)) {
                 queue.offer(new int[] {plus, cTime+1});
             }
-            if (multiply <= 100000 && !visited.contains(multiply)) {
+            if (multiply <= 100000 && !visited[multiply]) {
+//            if (multiply <= 100000 && !visited.contains(multiply)) {
                 queue.offer(new int[] {multiply, cTime});
             }
         }
