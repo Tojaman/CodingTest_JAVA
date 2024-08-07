@@ -5,6 +5,7 @@ import java.util.*;
 
 /** 문제 설명
  * 보관 후 하루 지나면 익은 토마토 주변 안익은 토마토 익음
+ *
  */
 class Node {
     int x, y, idx;
@@ -40,20 +41,20 @@ public class Main {
     }
 
     public static int bfs(int[][] box, int N, int M) {
-        int cnt = 0;
+        int time = 0;
 
         while (!q.isEmpty()) {
             Node node = q.poll();
 
-            if (node.idx != cnt) // 1초가 지났을 경우
-                cnt++;
+            if (node.idx != time) // 1초가 지났을 경우
+                time++;
 
             for (int i = 0; i < 4; i++) {
                 int cx = node.x + dx[i];
                 int cy = node.y + dy[i];
                 if (cx >= 0 && cx < box.length && cy >= 0 && cy < box[0].length && box[cx][cy] == 0) {
                     box[cx][cy] = 1;
-                    q.offer(new Node(cx, cy, cnt + 1));
+                    q.offer(new Node(cx, cy, time + 1));
                 }
             }
         }
@@ -66,7 +67,7 @@ public class Main {
                 }
             }
         }
-        return cnt;
+        return time;
     }
 }
 
