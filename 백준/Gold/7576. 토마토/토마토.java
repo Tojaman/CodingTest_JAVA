@@ -18,6 +18,7 @@ class Node {
 public class Main {
     static int[] dx = {1, -1, 0, 0};
     static int[] dy = {0, 0, 1, -1};
+    static Queue<Node> q = new LinkedList<>();
     public static void main(String [] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -26,35 +27,20 @@ public class Main {
         int M = Integer.parseInt(st.nextToken()); // 가로 칸 수
 
         int[][] box = new int[M][N];
-        ArrayList<int[]> one = new ArrayList<>();
-        int oneCnt = 0;
         for (int i = 0; i < M; i++) {
             String[] input = br.readLine().split(" ");
             for (int j = 0; j < N; j++) {
                 box[i][j] = Integer.parseInt(input[j]);
                 if (Objects.equals(input[j], "1")) {
-                    one.add(new int[]{i, j});
-                }
-                if (Objects.equals(input[j], "0")) {
-                    oneCnt += 1;
+                    q.offer(new Node(i, j, 0 ));
                 }
             }
         }
-        if (oneCnt == 0) {
-            System.out.println(0);
-            return;
-        }
-
-        int result = bfs(box, one, N, M);
-        System.out.println(result);
+        System.out.println(bfs(box, N, M));
     }
 
-    public static int bfs(int[][] box, ArrayList<int[]> one, int N, int M) {
-        Queue<Node> q = new LinkedList<>();
+    public static int bfs(int[][] box, int N, int M) {
         int cnt = 0;
-        for (int[] node : one) {
-            q.offer(new Node(node[0], node[1], cnt));
-        }
 
         while (!q.isEmpty()) {
             Node node = q.poll();
@@ -81,7 +67,6 @@ public class Main {
             }
         }
         return cnt;
-
     }
 }
 
