@@ -1,68 +1,64 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
+/** 문제 설명
+ * 그림과 같이 배추가 심어져 있을 때 필요한 흰지렁이의 최소 수는?
+ * 흰지렁이는 상하좌우에 있는 배추의 해충을 잡아먹을 수 있다.
+ */
+
+/** 풀이 방법
+ * 배추들의 부분 집합의 개수를 출력하면 된다,
+ */
 public class Main {
-    static boolean[][] visit;
     static int[] dx = { 0, -1, 0, 1 };
     static int[] dy = { 1, 0, -1, 0 };
-    static int m, n;
-    static int[][] napa;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st;
 
-        int k;
-
-
-        // T : 테스트 횟수
         int T = Integer.parseInt(br.readLine());
-        for (int i = 0; i < T; i++) {
-            int cnt = 0;
-            st = new StringTokenizer(br.readLine(), " ");
-            m = Integer.parseInt(st.nextToken());
-            n = Integer.parseInt(st.nextToken());
-            k = Integer.parseInt(st.nextToken());
+        for (int t = 0; t < T; t++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int M = Integer.parseInt(st.nextToken()); // 가로
+            int N = Integer.parseInt(st.nextToken()); // 세로
+            int K = Integer.parseInt(st.nextToken());
 
-            napa = new int[m][n];
-            visit = new boolean[m][n];
-
-            for (int j = 0; j < k; j++) {
+            // 가로 길이가 행의 크기, 세로 길이가 열의 크기 아닌가?
+            int[][] map = new int[M][N];
+            boolean[][] visited = new boolean[M][N];
+            for (int i = 0; i < K; i++) {
                 st = new StringTokenizer(br.readLine());
-                int tx = Integer.parseInt(st.nextToken());
-                int ty = Integer.parseInt(st.nextToken());
-                napa[tx][ty] = 1;
+                int x = Integer.parseInt(st.nextToken());
+                int y = Integer.parseInt(st.nextToken());
+                map[x][y] = 1;
             }
 
-            for (int a = 0; a < m; a++)
-                for (int b = 0; b < n; b++) {
-                    if (!visit[a][b] && napa[a][b] == 1) {
-                        dfs(a, b);
+            int cnt = 0;
+            for (int i = 0; i < M; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (map[i][j] == 1 && !visited[i][j]) {
+                        dfs(map, visited, i, j);
                         cnt++;
                     }
                 }
+            }
             System.out.println(cnt);
         }
 
-
     }
-    static void dfs(int x, int y) {
-        visit[x][y] = true; // 확인한 곳 = true
 
+    public static void dfs(int[][] map, boolean[][] visited , int x, int y) {
+        visited[x][y] = true;
         for (int i = 0; i < 4; i++) {
-            // 상하좌우
             int cx = x + dx[i];
             int cy = y + dy[i];
-
-            // 구간 밖으로 벗어나지 않았고
-            if (cx >= 0 && cy >= 0 && cx < m && cy < n) {
-                // 방문하지 않았고 && 인접한 곳에 배추가 있다면
-                if (!visit[cx][cy] && napa[cx][cy] == 1) {
-                    dfs(cx, cy);
-                }
+            if (cx >= 0 && cx < map.length && cy >= 0 && cy < map[0].length) {
+                if (map[cx][cy] == 1 && !visited[cx][cy])
+                    dfs(map, visited, cx, cy);
             }
-
         }
-
     }
 }
