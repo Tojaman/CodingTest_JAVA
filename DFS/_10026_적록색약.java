@@ -23,6 +23,7 @@ public class _10026_적록색약 {
                 paints[i][j] = paint[j];
         }
 
+        // 일반인이 보는 구역
         int cnt = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
@@ -33,6 +34,7 @@ public class _10026_적록색약 {
             }
         }
 
+        // 적록색약이 보는 구역을 구하기 위해 "R"을 "G"로 바꾼다.
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 visited[i][j] = false;
@@ -41,6 +43,7 @@ public class _10026_적록색약 {
             }
         }
 
+        // 적록색약이 보는 구역
         int cntRG = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
