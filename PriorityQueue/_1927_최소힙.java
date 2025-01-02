@@ -14,8 +14,8 @@ public class _1927_최소힙 {
         int n = Integer.parseInt(br.readLine());
         for (int i = 0; i < n; i++) {
             int x = Integer.parseInt(br.readLine());
-            // x가 양수면 우선순위 큐에 삽입
-            // x가 0이면 우선순위 큐에서 우선순위 값 출력 / 만약 우선순위 큐가 비어 있다면 0 출력
+            // x가 양수면 최소 힙에 삽입
+            // x가 0이면 최소 힙에서 최솟값(우선순위가 높은 값) 출력 / 만약 최소 힙이 비어 있다면 0 출력
             // x가 음수면 무시
             if (x > 0) {
                 minHeap.offer(x);
