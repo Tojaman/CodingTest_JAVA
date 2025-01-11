@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "_1389_케빈_베이컨의_6단계_법칙",
+            "request": "launch",
+            "mainClass": "BFS._1389_케빈_베이컨의_6단계_법칙",
+            "projectName": "CodingTest_JAVA_c4d515c6"
+        },
+        {
+            "type": "java",
             "name": "_2667_단지번호붙이기",
             "request": "launch",
             "mainClass": "_2667_단지번호붙이기",
