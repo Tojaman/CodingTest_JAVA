@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "_1072_게임",
+            "request": "launch",
+            "mainClass": "_1072_게임",
+            "projectName": "CodingTest_JAVA_c4d515c6"
+        },
+        {
+            "type": "java",
             "name": "_10816_숫자카드2",
             "request": "launch",
             "mainClass": "_10816_숫자카드2",
