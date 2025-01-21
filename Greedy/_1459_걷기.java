@@ -3,6 +3,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+/** 반성
+ * 그리디 알고리즘은 현재 상황에서 최선의 선택을 하는 알고리즘이다.
+ * 그래서 이번 문제도 한 칸 한 칸 최선의 선택을 하도록 구현했다.
+ * 그런데 시간이 너무 오래 걸려서 생각해보니 한번에 이동하는 것이 훨씬 효율적이었다.
+ * 결론: 특정 알고리즘으로만 풀려고 하지 말고 일단 최적의 풀이가 있는지부터 생각해보고 알고리즘을 적용하든가 하자.
+ */
 public class _1459_걷기 {
     public static void main(String[] arge) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
