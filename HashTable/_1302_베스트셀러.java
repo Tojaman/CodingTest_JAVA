@@ -6,11 +6,13 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 /**
- * 아이디어는 떠올렸으나 HashMap 메서드 미숙지로 풀지 못함.
- * 나중에 다시 풀어보기
+ * 가장 많이 팔린 책 출력
+ * HashMap에 키로 책 이름을 넣고 value로 판매량을 넣는다.
+ * HashMap에 있는 모든 데이터의 Key와 Value를 동시에 사용해야 할 때 주로 사용
  */
 public class _1302_베스트셀러 {
     public static void main(String[] args) throws IOException {
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int n = Integer.parseInt(br.readLine());
@@ -19,17 +21,18 @@ public class _1302_베스트셀러 {
         for (int i = 0; i < n; i++) {
             String book = br.readLine();
             hm.put(book, hm.getOrDefault(book, 0) + 1);
-            max = Math.max(max, hm.get(book)); // 최대 값 구하기
+            max = Math.max(max, hm.get(book));
         }
 
-        // 가장 많이 팔린 책이 여러가지 일 경우를 대비해 출력
-        List<String> books = new ArrayList<>();
-        List<Map.Entry<String, Integer>> entrys = new ArrayList<>(hm.entrySet());
-        for (Map.Entry<String, Integer> entry : entrys) {
-            if (entry.getValue() == max)
-            books.add(entry.getKey());
+        List<String> result = new ArrayList<>(); // 가장 많이 팔린 책이 여러권일 경우 사전 순 정렬을 위함
+
+        for (Map.Entry<String, Integer> entry : hm.entrySet()) {
+            if (entry.getValue() == max) {
+                result.add(entry.getKey());
+            }
         }
-        Collections.sort(books);
-        System.out.println(books.get(0));
+        Collections.sort(result);
+        System.out.println(result.get(0));
     }
 }
+    
