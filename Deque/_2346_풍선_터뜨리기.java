@@ -5,8 +5,52 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 import java.util.StringTokenizer;
+
+/** 2025.06.30
+ * 원형이고 풍선에 적혀 있는 숫자에 따라 앞 뒤로 빼야 하기 때문에 Deque로 구현
+ * 먼저 앞에서 풍선을 한 개 뺀다.
+ * 뺀 풍선 안에 적혀있는 숫자가
+   * 양수일 경우 숫자-1 만큼 앞에서 빼서 뒤로 넣는다.
+   * 음수일 경우 숫자 만큼 뒤에서 빼서 앞으로 넣는다.
+ * 위 과정을 반복하다 풍선이 하나만 남았을 경우 남은 풍선을 빼고 종료 
+ */
+public class _2346_풍선_터뜨리기 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        int n = Integer.parseInt(br.readLine());
+        Deque<int[]> deque = new ArrayDeque<>();
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 1; i <= n; i++) {
+            int num = Integer.parseInt(st.nextToken());
+            deque.offerLast(new int[] {i, num});
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while (!deque.isEmpty()) {
+
+            int[] now = deque.pollFirst();
+            sb.append(now[0] + " ");
+
+            // 종료 조건 - 모든 풍선을 뺀 경우
+            if (deque.isEmpty()) break;
+
+            int next = now[1];
+            if (next > 0) { // 양수 -> 앞에서 뽑음
+                for (int i = 1; i < next; i++) {
+                    deque.offerLast(deque.pollFirst());
+                }
+            }
+            if (next < 0) { // 음수 -> 뒤에서 뽑음
+                for (int i = 0; i > next; i--) {
+                    deque.offerFirst(deque.pollLast());
+                }
+            }
+        }
+        System.out.print(sb.toString().trim());
+    }
+}
 
 /**
  * n개의 풍선이 덱에 존재
@@ -34,6 +78,7 @@ import java.util.StringTokenizer;
  * 3. 만약 덱이 비었다면 탈출
  * 위 과정 반복
  */
+/**
 public class _2346_풍선_터뜨리기 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -81,3 +126,4 @@ class Balloon {
         this.val = val;
     }
 }
+*/
