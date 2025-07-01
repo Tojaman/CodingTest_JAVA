@@ -6,6 +6,33 @@ import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
+/** 풀이 방법
+ * 최소 힙 문제와 같은 방식으로 푼다.
+ * 대신 우선순위 큐를 최대 힙으로 만듬
+ */
+public class _11279_최대힙 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+
+        int n = Integer.parseInt(br.readLine());
+        for (int i = 0; i < n; i++) {
+            int x = Integer.parseInt(br.readLine());
+
+            if (x == 0) {
+                if (pq.isEmpty()) {
+                    System.out.println(0);
+                } else {
+                    System.out.println(pq.poll());
+                }
+            }
+            pq.offer(x);
+        }
+    }
+}
+
+/** 이전 풀이
 public class _11279_최대힙 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -30,3 +57,4 @@ public class _11279_최대힙 {
         }
     }
 }
+*/
