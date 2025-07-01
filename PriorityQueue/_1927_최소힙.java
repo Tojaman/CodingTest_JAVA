@@ -5,6 +5,35 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.PriorityQueue;
 
+/** 풀이 방법 - 25.07.01
+ * 매우 간단하게 풀 수 있다.
+ * 가장 작은 값을 출력 -> 최소 힙(우선순위 큐)
+ * 가장 큰 값을 출력 -> 최대 힙(우선순위 큐 reverse)
+ * 따라서 이번 문제는 최소힙에 값을 넣고 조건에 맞게 출력하면 되는 간단한 문제이다.
+ */
+public class _1927_최소힙 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        int n = Integer.parseInt(br.readLine());
+        for (int i = 0; i < n; i++) {
+            int input = Integer.parseInt(br.readLine());
+            if (input == 0) {
+                if (!pq.isEmpty()) {
+                    System.out.println(pq.poll());
+                }
+                else {
+                    System.out.println(0);
+                }
+                continue;
+            }
+            pq.offer(input);
+        }
+    }
+}
+
+/** 이전 풀이
 public class _1927_최소힙 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -27,7 +56,6 @@ public class _1927_최소힙 {
                 }
             }
         }
-
     }
-
 }
+*/
