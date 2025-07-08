@@ -3,16 +3,91 @@ package DFS;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-/** LinkedList를 이용한 DFS, BFS
- * 
+/** 복습 - 인접 행렬
+ * 작은 정점 먼저 방문하여 모든 정점을 방문
+ * 정점 번호: 1 ~ N
+ * 간선 개수: M
+ * 탐색 시작 정점 번호: V
  */
 public class _1260_DFS와_BFS {
-    public static LinkedList<Integer>[] adj; // 노드를 연결할 링크드리스트 배열
+    static boolean[] visited;
+    static boolean[][] nodes;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        int v = Integer.parseInt(st.nextToken());
+
+        visited = new boolean[n+1];
+        nodes = new boolean[n+1][n+1];
+        for (int i = 0; i < m; i++) {
+            st = new StringTokenizer(br.readLine());
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+            nodes[x][y] = true;
+            nodes[y][x] = true;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        dfs(v, sb);
+        System.out.println(sb.toString().trim());
+        
+        bfs(v, n);
+    }
+
+    /**
+     * 만약 방문한 정점이라면 뒤로 돌아감(return)
+     */
+    public static void dfs(int nowNode, StringBuilder sb) {
+
+        sb.append(nowNode + " ");
+        // 방문한하지 않은 정점이면 방문
+        if (!visited[nowNode]) {
+            visited[nowNode] = true;
+            for (int i = 1; i < nodes[nowNode].length; i++) {
+                if (!visited[i] && nodes[nowNode][i]) {
+                    dfs(i, sb);
+                }
+            }
+        }
+    }
+
+    public static void bfs(int startNode, int n) {
+        boolean[] visitedBfs = new boolean[n+1];
+
+        Queue<Integer> queue = new LinkedList<>();
+        StringBuilder sb = new StringBuilder();
+
+        queue.offer(startNode);
+        visitedBfs[startNode] = true;
+
+        while (!queue.isEmpty()) {
+            int nowNode = queue.poll();
+            sb.append(nowNode + " ");
+
+            for (int i = 1; i < nodes[nowNode].length; i++) {
+                
+                // 방문하지 않았고 연결된 노드라면
+                if (!visitedBfs[i] && nodes[nowNode][i]) {
+                    queue.offer(i);
+                    visitedBfs[i] = true;
+                }
+            }
+        }
+        System.out.println(sb.toString().trim());
+    }
+}
+
+/** 처음 풀이 - 인접 리스트
+public class Main {
+    public static LinkedList<Integer>[] adj;
     public static boolean[] visited;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -24,19 +99,8 @@ public class _1260_DFS와_BFS {
 
         adj = new LinkedList[n + 1];
         visited = new boolean[n + 1];
-
-        // 노드를 저장할 각 배열을 LinkedList로 초기화
-        // 삽입과 삭제에서 ArrayList보다 빠르기 때문에 LinkedList 사용용
-        // ArrayList 삽입/삭제: 끝에서 삽입 삭제 = O(1) | 시작, 중간에서 삽입/삭제 = O(n)
-        // LinkedList 삽입/삭제: 시작, 중간, 끝 삽입 삭제 = O(1)
         for (int i = 1; i <= n; i++) adj[i] = new LinkedList<>();
 
-        /*
-        adj[1] = [2, 3, 4]
-        adj[2] = [1, 4]
-        adj[3] = [1, 4]
-        adj[4] = [1, 2, 3]
-        */
         for (int i = 1; i <= m; i++) {
             st = new StringTokenizer(br.readLine());
             int node1 = Integer.parseInt(st.nextToken());
@@ -46,7 +110,6 @@ public class _1260_DFS와_BFS {
             adj[node2].add(node1);
         }
 
-        // 방문 가능한 정점이 여러개일 경우 정점 번호가 작은 것을 먼저 방문하라는 조건이 있으므로 정렬
         for (int i = 1; i < adj.length; i++) Collections.sort(adj[i]);
 
         
@@ -96,3 +159,4 @@ public class _1260_DFS와_BFS {
         }
     }
 }
+ */
