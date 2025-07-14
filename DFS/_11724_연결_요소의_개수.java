@@ -5,7 +5,55 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 
+/** 복습 풀이 - 25.07.14
+ * 1. LinkedList로 그래프 그리기
+ * 2. DFS 탐색을 통해 연결 요소의 개수 구하기
+ */
 public class _11724_연결_요소의_개수 {
+    private static LinkedList<Integer>[] ll;
+    private static boolean visited[];
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        visited = new boolean[n+1];
+        ll = new LinkedList[n+1];
+        for (int i = 1; i <= n; i++)
+            ll[i] = new LinkedList<>();
+
+        for (int i = 0; i < m; i++) {
+            st = new StringTokenizer(br.readLine());
+            int node1 = Integer.parseInt(st.nextToken());
+            int node2 = Integer.parseInt(st.nextToken());
+            ll[node1].add(node2);
+            ll[node2].add(node1);
+        }
+
+        int result = 0;
+        for (int i = 1; i <= n; i++) {
+            if (!visited[i]) {
+                dfs(i);
+                result++;
+            }
+        }
+        System.out.print(result);
+    }
+
+    public static void dfs(int node) {
+
+        visited[node] = true;
+        for (int nextNode : ll[node]) {
+            if (!visited[nextNode]) {
+                dfs(nextNode);
+            }
+        }
+    }
+}
+
+/* 첫번째 풀이
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -44,3 +92,4 @@ public class _11724_연결_요소의_개수 {
         }
     }
 }
+**/
