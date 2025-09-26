@@ -52,7 +52,8 @@ class _17683_3차_방금그곡 {
                 .replaceAll("D#", "d")
                 .replaceAll("F#", "f")
                 .replaceAll("G#", "g")
-                .replaceAll("A#", "a");
+                .replaceAll("A#", "a")
+                .replaceAll("B#", "M");
     }
     
     private String buildPlayedMelody(String score, int duration) {
