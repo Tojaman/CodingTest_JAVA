@@ -7,6 +7,32 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class _2178_미로_탐색 {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -55,3 +81,4 @@ public class _2178_미로_탐색 {
         System.out.println(move[N * M - 1]);
     }
 }
+*/
