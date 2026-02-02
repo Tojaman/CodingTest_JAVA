@@ -3,9 +3,36 @@ package HashTable;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.StringTokenizer;
+import java.util.*;
 
+public class _9375_패션왕_신해빈 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 0; i < tc; i++) {
+            int n = Integer.parseInt(br.readLine());
+            Map<String, Integer> hm = new HashMap<>();
+            
+            for (int j = 0; j < n; j++) {
+                StringTokenizer st = new StringTokenizer(br.readLine());
+                st.nextToken(); // 옷의 이름은 필요 없음
+                String type = st.nextToken();
+                hm.put(type, hm.getOrDefault(type, 1) + 1); // 이미 있는 종류면 +1 / 없는 종류면 1(안입는 것도 가정해서 기본값은 1)
+            }
+            
+            int result = 1;
+            for (int cnt : hm.values()) {
+                result = result * cnt; 
+            }
+            sb.append(result - 1).append("\n");
+        }
+        System.out.println(sb.toString());
+    }
+}
+
+/* 
 public class _9375_패션왕_신해빈 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -31,3 +58,4 @@ public class _9375_패션왕_신해빈 {
         }
     }
 }
+*/
