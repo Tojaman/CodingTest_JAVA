@@ -1,0 +1,15 @@
+-- where보다 join이 먼저
+-- 와일드 카드(%)를 사용할 때는 LIKE 사용 (WHERE 컬럼명 LIKE '패턴')
+
+SELECT b.TITLE, r.BOARD_ID, r.REPLY_ID, r.WRITER_ID, r.CONTENTS, DATE_FORMAT(r.CREATED_DATE, '%Y-%m-%d') as CREATED_DATE
+from USED_GOODS_BOARD b
+join USED_GOODS_REPLY r on b.BOARD_ID = r.BOARD_ID
+where b.CREATED_DATE like '2022-10%'
+order by r.CREATED_DATE asc, b.TITLE asc;
+
+# SELECT b.TITLE, r.BOARD_ID, r.REPLY_ID, r.WRITER_ID, r.CONTENTS, DATE_FORMAT(r.CREATED_DATE, '%Y-%m-%d') as CREATED_DATE
+# from USED_GOODS_BOARD b
+# join USED_GOODS_REPLY r on b.BOARD_ID = r.BOARD_ID
+# WHERE YEAR(B.CREATED_DATE) = 2022
+#   AND MONTH(B.CREATED_DATE) = 10
+# order by r.CREATED_DATE asc, b.TITLE asc;

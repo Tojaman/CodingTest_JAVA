@@ -1,0 +1,9 @@
+-- DATE_FORMAT(b.PUBLISHED_DATE, '%Y-%m-%d')
+-- DATE 타입은 '2020.01.01' 형식으로 사용
+SELECT
+b.BOOK_ID as '도서 ID',
+DATE_FORMAT(b.PUBLISHED_DATE, '%Y-%m-%d') as '출판일'
+from BOOK b
+where b.CATEGORY = '인문' AND
+b.PUBLISHED_DATE BETWEEN '2021-01-01' AND '2021-12-31'
+order by b.PUBLISHED_DATE ASC;
